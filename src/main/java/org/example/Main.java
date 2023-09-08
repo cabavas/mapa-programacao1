@@ -2,19 +2,14 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        Exame exame = new Exame("João", "A+", 1990);
-        double glicemia = 130.0;
-        double colesterolLDL = 60.0;
-        double colesterolHDL = 50.0;
-        String riscoColesterol = "B";
-        double triglicerideos = 80.0;
+        Exame exameGlicemia = new Glicemia("Paciente1", "AB-", 1990, 110);
+        exameGlicemia.mostrarResultado();
 
-        System.out.println("Nome do paciente: " + exame.getNomePaciente());
-        System.out.println("Tipo sanguíneo: " + exame.getTipoSanguineo());
-        System.out.println("Idade do paciente: " + exame.calcularIdade());
+        Exame exameColesterol = new Colesterol("Paciente2", "O-", 1985, 120, 50);
+        ((Colesterol) exameColesterol).setRisco('A');
+        exameColesterol.mostrarResultado();
 
-        exame.classificarResultadoGlicemia(glicemia);
-        exame.classificarResultadoColesterol(colesterolLDL, colesterolHDL, riscoColesterol);
-        exame.classificarResultadoTriglicerideos(triglicerideos, exame.calcularIdade());
+        Exame exameTriglicerideos = new Triglicerideos("Paciente3", "A+", 2005, 80);
+        exameTriglicerideos.mostrarResultado();
     }
 }

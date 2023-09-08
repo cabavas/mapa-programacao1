@@ -1,79 +1,69 @@
 package org.example;
 
-import java.time.Year;
+import java.util.Calendar;
 
 public class Exame {
-    private String nomePaciente;
+    private String nome;
     private String tipoSanguineo;
     private int anoNascimento;
 
-    public Exame(String nomePaciente, String tipoSanguineo, int anoNascimento) {
-        this.nomePaciente = nomePaciente;
+    public Exame() {
+    }
+
+    public Exame(String nome, String tipoSanguineo, int anoNascimento) {
+        this.nome = nome;
         this.tipoSanguineo = tipoSanguineo;
         this.anoNascimento = anoNascimento;
     }
 
-    public String getNomePaciente() {
-        return nomePaciente;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getTipoSanguineo() {
         return tipoSanguineo;
     }
 
+    public void setTipoSanguineo(String tipoSanguineo) {
+        this.tipoSanguineo = tipoSanguineo;
+    }
+
     public int getAnoNascimento() {
         return anoNascimento;
     }
 
+    public void setAnoNascimento(int anoNascimento) {
+        this.anoNascimento = anoNascimento;
+    }
+
     public int calcularIdade() {
-        int anoAtual = Year.now().getValue();
-        return anoAtual - anoNascimento;
+        int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+        return
+                anoAtual - anoNascimento;
     }
 
-    public void classificarResultadoGlicemia(double quantidadeGlicose) {
-        if (quantidadeGlicose < 100) {
-            System.out.println("Normoglicemia");
-        } else if (quantidadeGlicose >= 100 && quantidadeGlicose < 126) {
-            System.out.println("Pré-diabetes");
-        } else {
-            System.out.println("Diabetes estabelecido");
-        }
+    public void cadastrarExame(double valor) {
     }
 
-    public void classificarResultadoColesterol(double quantidadeLDL, double quantidadeHDL, String risco) {
-        System.out.println("Resultado para Colesterol LDL: " + quantidadeLDL);
-        System.out.println("Resultado para Colesterol HDL: " + quantidadeHDL);
-
-        if ("B".equals(risco)) {
-            if (quantidadeLDL < 100 && quantidadeHDL > 45) {
-                System.out.println("Baixo risco");
-            }
-        } else if ("M".equals(risco)) {
-            if (quantidadeLDL < 70 && quantidadeHDL > 40) {
-                System.out.println("Médio risco");
-            }
-        } else if ("A".equals(risco)) {
-            if (quantidadeLDL < 50 && quantidadeHDL > 40) {
-                System.out.println("Alto risco");
-            }
-        }
+    public String classificarResultado() {
+        return "Resultado não disponível";
     }
 
-    public void classificarResultadoTriglicerideos(double quantidadeTriglicerideos, int idade) {
-        System.out.println("Resultado para Triglicerídeos: " + quantidadeTriglicerideos);
+    protected double obterValorExame() {
+        return 0.0;
+    }
 
-        if (idade >= 0 && idade <= 9) {
-            if (quantidadeTriglicerideos < 75) {
-                System.out.println("Normal");
-            }
-        } else if (idade >= 10 && idade <= 19) {
-            if (quantidadeTriglicerideos < 90) {
-                System.out.println("Normal");
-            }
-        } else if (idade >= 20) {
-            if (quantidadeTriglicerideos < 150) {
-                System.out.println("Normal");
-            }
-        }
+    public void mostrarResultado() {
+        double valorExame = obterValorExame();
+        String classificacao = classificarResultado();
+        System.out.println("Nome do Paciente: " + nome);
+        System.out.println("Idade do Paciente: " + calcularIdade() + " anos");
+        System.out.println("Tipo Sanguíneo: " + tipoSanguineo);
+        System.out.println("Valor do Exame: " + valorExame);
+        System.out.println("Classificação: " + classificacao);
     }
 }
